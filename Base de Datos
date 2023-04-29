@@ -1,0 +1,268 @@
+/*Nombre: Fernando Medina   Matricula: 21-siin-1-026  Seccion: 0410 */
+
+	SELECT * FROM clientes_empresa
+	SELECT * FROM departamentos
+	SELECT * FROM empleados
+	SELECT * FROM facturas
+	SELECT * FROM ordenes_compra
+	SELECT * FROM ordenes_venta
+	SELECT * FROM productos
+	SELECT * FROM proveedores_materia_prima
+
+USE [master]
+GO
+/****** Object:  Database [EmpresaTroquel]    Script Date: 27/04/2023 22:46:35 ******/
+CREATE DATABASE [EmpresaTroquel]
+
+USE [EmpresaTroquel]
+GO
+/****** Object:  Table [dbo].[clientes_empresa]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[clientes_empresa](
+	[cliente_id] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[apellido] [varchar](50) NOT NULL,
+	[direccion] [varchar](255) NULL,
+	[telefono] [varchar](20) NULL,
+	[email] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cliente_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[departamentos]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[departamentos](
+	[departamentoId] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[empleadoId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[departamentoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[empleados]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[empleados](
+	[empleado_id] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[apellido] [varchar](50) NOT NULL,
+	[identificacion] [varchar](20) NULL,
+	[departamento_id] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[empleado_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[facturas]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[facturas](
+	[factura_id] [int] NOT NULL,
+	[fecha] [date] NOT NULL,
+	[totalid] [decimal](10, 2) NOT NULL,
+	[cliente] [varchar](50) NULL,
+	[cantidadid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[factura_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ordenes_compra]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ordenes_compra](
+	[orden_compra_id] [int] NOT NULL,
+	[fecha] [date] NOT NULL,
+	[cliente] [varchar](50) NULL,
+	[totaid] [decimal](18, 0) NULL,
+	[cantidadid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orden_compra_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ordenes_venta]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ordenes_venta](
+	[orden_venta_id] [int] NOT NULL,
+	[fecha] [date] NOT NULL,
+	[cliente] [varchar](50) NULL,
+	[totalid] [int] NULL,
+	[empleado] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orden_venta_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[productos]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[productos](
+	[producto_id] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[descripcion] [varchar](255) NULL,
+	[precioid] [decimal](10, 2) NOT NULL,
+	[cantidadid] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[producto_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[proveedores_materia_prima]    Script Date: 27/04/2023 22:46:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[proveedores_materia_prima](
+	[proveedor_id] [int] NOT NULL,
+	[nombre] [varchar](50) NOT NULL,
+	[direccion] [varchar](255) NULL,
+	[telefono] [varchar](20) NULL,
+	[email] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[proveedor_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (1, N'Juan', N'Medina', N'Calle 25, los guandules ', N'829-533-2501', N'j.medina@gamil.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (2, N'Maria ', N'Lopez', N'Ave. mexico 589', N'829-251-4056', N'm.lopez@gmail.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (3, N'Carmen ', N'Abad', N'Calle acero 19', N'809-431-2530', N'c.abad@gmail.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (4, N'Antonio', N'Del Villar', N'Calle amigo 12', N'849-552-2503', N'a.del billar@gmail.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (5, N'Alberto', N'Diaz ', N'calle guadalupe ', N'829-456-1111', N'a.diaz@gmail.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (6, N'Pedro ', N'Rodriguez', N'Auto via Santiago ', N'809-561-4890', N'p.rodriguez@hotmail.com ')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (7, N'Manuel ', N'Perez Jimenez ', N'Autovia del este ', N'849-254-3000', N'm.perez@gmail.com ')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (8, N'Luis', N'Medina', N'Calle 5, Los Alcarrizos ', N'809-545-5198', N'l.medina@gmail.com')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (9, N'Altagracia', N'Vargas ', N'Calle Emilio amoller', N'849-623-1585', N'a.vargas@hotmail.com ')
+INSERT [dbo].[clientes_empresa] ([cliente_id], [nombre], [apellido], [direccion], [telefono], [email]) VALUES (10, N'Alex', N'Morillo', N'Calle Puerto Rico ', N'829-560-2144', N'a.morillo@gmail.com')
+GO
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (1, N'Venta', 1)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (2, N'Produccion ', 2)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (3, N'Despacho ', 3)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (4, N'Instalacion', 4)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (5, N'Contabilidad', 5)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (6, N'Recursos Humanos ', 6)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (7, N'Mantenimiento ', 7)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (8, N'conserge ', 8)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (9, N'Resepcion ', 9)
+INSERT [dbo].[departamentos] ([departamentoId], [nombre], [empleadoId]) VALUES (10, N'seguridad ', 10)
+GO
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (1, N'maria', N'valdez', N'25346', 1)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (2, N'jose ', N'medina', N'12564', 2)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (3, N'ramon', N'lebrom', N'02468', 3)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (4, N'Antonio', N'Martinez', N'25649', 4)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (5, N'Alberto ', N'Ramirez', N'25499', 4)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (6, N'Yoli', N'Gonzales', N'12891', 8)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (7, N'Juan', N'Mendez', N'11268', 5)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (8, N'Ronald', N'Beras', N'12853', 4)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (9, N'Anabelle', N'Perez', N'32588', 5)
+INSERT [dbo].[empleados] ([empleado_id], [nombre], [apellido], [identificacion], [departamento_id]) VALUES (10, N'Pedro', N'Castillo', N'86784', 3)
+GO
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (1, CAST(N'2021-11-20' AS Date), CAST(1.00 AS Decimal(10, 2)), N'1', 5)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (2, CAST(N'2022-02-15' AS Date), CAST(2.00 AS Decimal(10, 2)), N'2', 10)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (3, CAST(N'2023-02-15' AS Date), CAST(3.00 AS Decimal(10, 2)), N'3', 200)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (4, CAST(N'2022-02-03' AS Date), CAST(15000.00 AS Decimal(10, 2)), N'4', 45)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (5, CAST(N'2023-04-15' AS Date), CAST(250005.00 AS Decimal(10, 2)), N'5', 150)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (6, CAST(N'0202-04-11' AS Date), CAST(325000.00 AS Decimal(10, 2)), N'6', 40)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (7, CAST(N'2020-02-29' AS Date), CAST(148530.00 AS Decimal(10, 2)), N'7', 78)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (8, CAST(N'2022-11-15' AS Date), CAST(460250.00 AS Decimal(10, 2)), N'8', 210)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (9, CAST(N'2023-02-27' AS Date), CAST(190460.00 AS Decimal(10, 2)), N'9', 345)
+INSERT [dbo].[facturas] ([factura_id], [fecha], [totalid], [cliente], [cantidadid]) VALUES (10, CAST(N'2023-12-01' AS Date), CAST(503654.00 AS Decimal(10, 2)), N'10', 5)
+GO
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (1, CAST(N'2021-11-20' AS Date), N'1', CAST(1 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (2, CAST(N'2022-02-15' AS Date), N'2', CAST(2 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (3, CAST(N'2023-01-25' AS Date), N'3', CAST(3 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (4, CAST(N'2022-02-03' AS Date), N'4', CAST(4 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (5, CAST(N'2023-01-15' AS Date), N'5', CAST(5 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (6, CAST(N'2020-04-11' AS Date), N'6', CAST(6 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (7, CAST(N'2020-02-29' AS Date), N'7', CAST(7 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (8, CAST(N'2022-11-15' AS Date), N'8', CAST(8 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (9, CAST(N'2023-02-27' AS Date), N'9', CAST(9 AS Decimal(18, 0)), 200)
+INSERT [dbo].[ordenes_compra] ([orden_compra_id], [fecha], [cliente], [totaid], [cantidadid]) VALUES (10, CAST(N'2023-03-12' AS Date), N'10', CAST(10 AS Decimal(18, 0)), 200)
+GO
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (1, CAST(N'2021-11-20' AS Date), N'1', 1, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (2, CAST(N'2022-02-15' AS Date), N'2', 2, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (3, CAST(N'2023-01-25' AS Date), N'3', 3, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (4, CAST(N'2022-02-03' AS Date), N'4', 4, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (5, CAST(N'2023-01-15' AS Date), N'5', 5, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (6, CAST(N'2020-04-11' AS Date), N'6', 6, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (7, CAST(N'2020-02-29' AS Date), N'7', 7, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (8, CAST(N'2022-11-15' AS Date), N'8', 8, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (9, CAST(N'2023-02-27' AS Date), N'9', 9, N'1')
+INSERT [dbo].[ordenes_venta] ([orden_venta_id], [fecha], [cliente], [totalid], [empleado]) VALUES (10, CAST(N'2023-03-12' AS Date), N'10', 10, N'1')
+GO
+INSERT [dbo].[productos] ([producto_id], [nombre], [descripcion], [precioid], [cantidadid]) VALUES (1, N'ventana', N'corredera', CAST(2000.00 AS Decimal(10, 2)), 2000)
+INSERT [dbo].[productos] ([producto_id], [nombre], [descripcion], [precioid], [cantidadid]) VALUES (2, N'puertas', N'balconeras', CAST(45000.00 AS Decimal(10, 2)), 2000)
+INSERT [dbo].[productos] ([producto_id], [nombre], [descripcion], [precioid], [cantidadid]) VALUES (3, N'baranadas', N'barandas de a¿vidrio', CAST(1200.00 AS Decimal(10, 2)), 500)
+INSERT [dbo].[productos] ([producto_id], [nombre], [descripcion], [precioid], [cantidadid]) VALUES (4, N'Mamparas', N'vidrio fijo para baños ', CAST(8000.00 AS Decimal(10, 2)), 2000)
+INSERT [dbo].[productos] ([producto_id], [nombre], [descripcion], [precioid], [cantidadid]) VALUES (5, N'Ventanas abatibles ', N'ventyanas abatibles con bisagras ', CAST(15000.00 AS Decimal(10, 2)), 2000)
+GO
+INSERT [dbo].[proveedores_materia_prima] ([proveedor_id], [nombre], [direccion], [telefono], [email]) VALUES (1, N'Aluval', N'España', N'5245639', N'aluval.hotmail.com')
+INSERT [dbo].[proveedores_materia_prima] ([proveedor_id], [nombre], [direccion], [telefono], [email]) VALUES (2, N'Alugom', N'España', N'5248961', N'alugom.gmail.com')
+INSERT [dbo].[proveedores_materia_prima] ([proveedor_id], [nombre], [direccion], [telefono], [email]) VALUES (3, N'Astiglass', N'España', N'5268469', N'asriglass@gmail.com')
+GO
+ALTER TABLE [dbo].[departamentos]  WITH CHECK ADD  CONSTRAINT [FK_departamentos_clientes_empresa] FOREIGN KEY([departamentoId])
+REFERENCES [dbo].[clientes_empresa] ([cliente_id])
+GO
+ALTER TABLE [dbo].[departamentos] CHECK CONSTRAINT [FK_departamentos_clientes_empresa]
+GO
+ALTER TABLE [dbo].[empleados]  WITH CHECK ADD  CONSTRAINT [FK_empleados_departamentos] FOREIGN KEY([departamento_id])
+REFERENCES [dbo].[departamentos] ([departamentoId])
+GO
+ALTER TABLE [dbo].[empleados] CHECK CONSTRAINT [FK_empleados_departamentos]
+GO
+ALTER TABLE [dbo].[facturas]  WITH CHECK ADD  CONSTRAINT [FK_facturas_ordenes_compra] FOREIGN KEY([factura_id])
+REFERENCES [dbo].[ordenes_compra] ([orden_compra_id])
+GO
+ALTER TABLE [dbo].[facturas] CHECK CONSTRAINT [FK_facturas_ordenes_compra]
+GO
+ALTER TABLE [dbo].[ordenes_compra]  WITH CHECK ADD  CONSTRAINT [FK_ordenes_compra_empleados] FOREIGN KEY([orden_compra_id])
+REFERENCES [dbo].[empleados] ([empleado_id])
+GO
+ALTER TABLE [dbo].[ordenes_compra] CHECK CONSTRAINT [FK_ordenes_compra_empleados]
+GO
+ALTER TABLE [dbo].[ordenes_venta]  WITH CHECK ADD  CONSTRAINT [FK_ordenes_venta_facturas] FOREIGN KEY([orden_venta_id])
+REFERENCES [dbo].[facturas] ([factura_id])
+GO
+ALTER TABLE [dbo].[ordenes_venta] CHECK CONSTRAINT [FK_ordenes_venta_facturas]
+GO
+ALTER TABLE [dbo].[productos]  WITH CHECK ADD  CONSTRAINT [FK_productos_facturas] FOREIGN KEY([producto_id])
+REFERENCES [dbo].[facturas] ([factura_id])
+GO
+ALTER TABLE [dbo].[productos] CHECK CONSTRAINT [FK_productos_facturas]
+GO
+ALTER TABLE [dbo].[proveedores_materia_prima]  WITH CHECK ADD  CONSTRAINT [FK_proveedores_materia_prima_productos] FOREIGN KEY([proveedor_id])
+REFERENCES [dbo].[productos] ([producto_id])
+GO
+ALTER TABLE [dbo].[proveedores_materia_prima] CHECK CONSTRAINT [FK_proveedores_materia_prima_productos]
+GO
+USE [master]
+GO
+ALTER DATABASE [EmpresaTroquel] SET  READ_WRITE 
+GO
